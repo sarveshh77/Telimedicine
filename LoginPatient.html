@@ -19,6 +19,48 @@
             background-size: cover;
             background-position: center;
         }
+                /* Preloader Styles */
+                #preloader {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 9999;
+                }
+        
+                .spinner {
+                    border: 8px solid #f3f3f3; /* Light gray background */
+                    border-top: 8px solid #007bff; /* Blue color */
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    animation: spin 2s linear infinite;
+                }
+        
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+        
+             /* Main content hidden initially */
+                #content {
+                    display: none;
+                }
+        
+                /* Main content visible after preloader is hidden */
+                body.loaded #preloader {
+                    display: none;
+                }
+        
+                body.loaded #content {
+                    display: block;
+                }
+        
          /* Ensure the header is at the very top of the page */
 header {
     background: #eceef0;
@@ -157,11 +199,11 @@ header nav ul li a:hover {
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader-outter"></div>
-            <div class="loader-inner"></div>
+     <!-- Preloader -->
+     <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
 
             <div class="indicator"> 
                 <svg width="16px" height="12px">
@@ -278,5 +320,14 @@ header nav ul li a:hover {
             loginForm.reset();
         });
     </script>
+    <script>
+        // Simulate a loading delay of 3 seconds
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.body.classList.add('loaded');
+            }, 1000);  // 3 seconds delay (3000 milliseconds)
+        });
+    </script>
+
 </body>
 </html>
