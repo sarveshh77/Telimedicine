@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("img/regdoc.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+         /* Ensure the header is at the very top of the page */
+header {
+    background: #eceef0;
+    color: black;
+    padding: 10px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: fixed; /* Fix the header at the top */
+    top: 0; /* Set it at the top of the page */
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+body {
+    margin: 0; /* Remove default margin to prevent spacing issues */
+    padding-top: 70px; /* Add padding to avoid content overlapping with header */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header container for alignment */
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header .logo img {
+    max-height: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: rgb(20, 19, 19);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    header nav ul li {
+        margin: 10px 0;
+    }
+}
+
+        
+        .container {
+            width: 600px; /* Increased width */
+            background: #fff;
+            padding: 30px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow for prominence */
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem; /* Larger font size for title */
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px; /* Add more space between form fields */
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input[type="text"], input[type="password"], input[type="button"], input[type="submit"] {
+            width: 100%;
+            padding: 12px; /* Increased padding for larger input fields */
+            border-radius: 8px; /* More rounded input fields */
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px; /* Larger font size */
+        }
+        
+        input[type="button"], input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="button"]:hover, input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        .switch {
+            text-align: center;
+            margin-top: 15px; /* More spacing for the switch text */
+        }
+        
+        .switch a {
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px; /* Larger link font size */
+        }
+        
+        .switch a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+
+            <div class="indicator"> 
+                <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader -->
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="mailto:telimidicine@gmail.com" autocapitalize="false">telimidicine@gmail.com</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container" id="formContainer">
+        <!-- Register Form should display first -->
+        <form id="registerForm">
+            <h1>Patient Registration</h1>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="Enter your city" required>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="regPassword" placeholder="Enter a password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+            <div class="switch">
+                <span>Already have an account? <a id="loginLink">Login here</a></span>
+            </div>
+        </form>
+
+        <!-- Login Form should be hidden initially -->
+        <form id="loginForm" style="display: none;">
+            <h1>Patient Login</h1>
+            <div class="form-group">
+                <label for="loginName">Name</label>
+                <input type="text" id="loginName" name="loginName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login">
+            </div>
+            <div class="switch">
+                <span>New user? <a id="registerLink">Register here</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Toggle between login and register forms
+        const registerLink = document.getElementById('registerLink');
+        const loginLink = document.getElementById('loginLink');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        // Initially show Register form and hide Login form
+        registerForm.style.display = 'block';
+        loginForm.style.display = 'none';
+
+        registerLink.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Form submission logic (frontend validation example)
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+            } else {
+                alert("Registration successful!");
+                registerForm.reset();
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Login successful!");
+            loginForm.reset();
+        });
+    </script>
+</body>
+</html>
