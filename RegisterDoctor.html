@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     
-    <script src="js/doctor_reg.js"></script>
+    <script type= "module" src="js/doctor_reg.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js"></script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +21,7 @@
             background-position: center;
             margin: 0;
             padding: 0;
-            color: black;
+            color: black;   
         }
         #preloader {
             position: fixed;
@@ -370,9 +372,6 @@ npx http-server
     </p>
     <button onclick="closeModal()" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Close</button>
 </div>
-
-<!-- Terms and Conditions Checkbox -->
-<form onsubmit="return validateForm()" style="margin-top: 20px;">
     
 </form>
 
@@ -387,16 +386,6 @@ npx http-server
     function closeModal() {
         document.getElementById('termsModal').style.display = 'none';
         document.getElementById('overlay').style.display = 'none';
-    }
-
-    // Validate Form
-    function validateForm() {
-        const terms = document.getElementById('terms');
-        if (!terms.checked) {
-            alert("You must agree to the Terms and Conditions before submitting.");
-            return false;
-        }
-        return true;
     }
 
 </script>
