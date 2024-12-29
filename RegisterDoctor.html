@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Registration Form</title>
     <style>
+        
         /* General Styles */
         body {
             font-family: 'Arial', sans-serif;
@@ -20,6 +21,33 @@
             padding: 0;
             color: black;
         }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+        .spinner {
+            border: 8px solid #f3f3f3; /* Light gray background */
+            border-top: 8px solid #007bff; /* Blue color */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
         h1 {
             text-align: center;
             color: #000;
@@ -157,9 +185,29 @@ npx http-server
             background: rgba(0, 0, 0, 0.5);
             z-index: 500;
         }
+        
+        /* Main content hidden initially */
+        #content {
+            display: none;
+        }
+
+        /* Main content visible after preloader is hidden */
+        body.loaded #preloader {
+            display: none;
+        }
+
+        body.loaded #content {
+            display: block;
+        }
     </style>
 </head>
 <body>
+     <!-- Preloader -->
+     <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+   
     <!-- Header Section -->
     <header>
         <div class="container">
@@ -175,6 +223,21 @@ npx http-server
             </nav>
         </div>
     </header>
+     <!-- Preloader -->
+     <div class="preloader">
+        <div class="loader">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+
+            <div class="indicator"> 
+                <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader -->
 
     <!-- Registration Form -->
     <div class="form-container">
@@ -229,7 +292,7 @@ npx http-server
 </div>
 <div class="form-group">
     <label for="languages">Preffered Languages:</label>
-    <select id="languages" name="languages" required>
+    <select id="languages" name="languages" multiple >
         <option value="">Select Preffered Languages</option>
         <option value="English">English</option>
         <option value="Marathi">Marathi</option>
@@ -310,11 +373,7 @@ npx http-server
 
 <!-- Terms and Conditions Checkbox -->
 <form onsubmit="return validateForm()" style="margin-top: 20px;">
-    <label>
-        <input type="checkbox" id="terms" />
-        I agree to the <a href="#" onclick="openModal()">Terms and Conditions</a>.
-    </label>
-    <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+    
 </form>
 
 <script>
@@ -339,6 +398,16 @@ npx http-server
         }
         return true;
     }
+
+</script>
+
+<script>
+    // Simulate a loading delay of 3 seconds
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.body.classList.add('loaded');
+        }, 1000);  // 3 seconds delay (3000 milliseconds)
+    });
 </script>
 
 </body>
