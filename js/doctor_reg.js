@@ -1,12 +1,9 @@
-// Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getFirestore, doc, collection, setDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, addDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC0ncA7or5DGpfMj3bxYpz7pAmNDhJy9aM",
   authDomain: "bookmydoc-7b3d1.firebaseapp.com",
@@ -20,31 +17,76 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
-const db = getFirestore(app)
-
-/*document.getElementById("doctorForm").addEventListener("submit", async (event) => {
-
-
-
-    event.preventDefault();
-
-    const formData = {
-        fullName: document.getElementById("fullName").value,
-    };
+// Add event listener for form submission
+document.getElementById("doctorForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+  
+    // Gather form data
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const phoneNumber = document.getElementById("phoneNumber").value;
     const specialization = document.getElementById("specialization").value;
+    const issuingAuthority = document.getElementById("issuingAuthority").value;
+    const licenseNumber = document.getElementById("licenseNumber").value;
+    const languages = Array.from(
+      document.getElementById("languages").selectedOptions
+    ).map((option) => option.value);
+    const clinicName = document.getElementById("clinicName").value;
+    const country = document.getElementById("country").value;
+    const meetlink = document.getElementById("meetlink").value;
+    const availabilityDays = Array.from(
+      document.querySelectorAll("input[name='days']:checked")
+    ).map((input) => input.value);
+    const availabilityFromTime = document.getElementById(
+      "availabilityFromTime"
+    ).value;
+    const availabilityToTime = document.getElementById("availabilityToTime").value;
+  
+    const termsCheckbox = document.getElementById("terms");
 
+  if (!termsCheckbox.checked) {
+  alert("You must agree to the terms and conditions before registering.");
+  return;
+  }
+    
+
+    // Prepare the doctor data
+    const doctorData = {
+      fullName,
+      email,
+      phoneNumber,
+      specialization,
+      issuingAuthority,
+      licenseNumber,
+      languages,
+      clinicName,
+      country,
+      meetlink,
+      availability: {
+        days: availabilityDays,
+        fromTime: availabilityFromTime,
+        toTime: availabilityToTime,
+      },
+    };
+  
     try {
-        const specializationDocRef = doc(db, "Doctors", specialization);
-        const doctorCollectionRef = collection(specializationDocRef, "data");
-        await setDoc(doc(doctorCollectionRef), formData);
-
-        alert("Doctor added successfully!");
-        document.getElementById("doctorForm").reset();
+      // Generate a unique ID using the full name and a timestamp
+      const uniqueId = `${fullName.replace(/\s+/g, "_")}_${Date.now()}`;
+  
+      // Save the data under specialization-specific categories with the doctor ID as the name
+      const specializationDocRef = doc(
+        db,
+        `DoctorsBySpecialization/${specialization}/Doctors`,
+        uniqueId
+      );
+      await setDoc(specializationDocRef, doctorData);
+  
+      alert("Doctor registered successfully!");
+      document.getElementById("doctorForm").reset();
     } catch (error) {
-        console.error("Error saving data:", error);
-        alert("Error submitting form. Check console for details.");
+      console.error("Error adding document: ", error);
+      alert("An error occurred while saving the data.");
     }
-});*/
-
-console.log("Firebase initialized successfully!");
+  });
