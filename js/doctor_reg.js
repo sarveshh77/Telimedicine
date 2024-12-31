@@ -30,6 +30,7 @@ document.getElementById("doctorForm").addEventListener("submit", async (e) => {
     const specialization = document.getElementById("specialization").value;
     const issuingAuthority = document.getElementById("issuingAuthority").value;
     const licenseNumber = document.getElementById("licenseNumber").value;
+    const qualification = document.getElementById("qualification").value;
     const languages = Array.from(
       document.getElementById("languages").selectedOptions
     ).map((option) => option.value);
@@ -60,6 +61,7 @@ document.getElementById("doctorForm").addEventListener("submit", async (e) => {
       specialization,
       issuingAuthority,
       licenseNumber,
+      qualification,
       languages,
       clinicName,
       country,
