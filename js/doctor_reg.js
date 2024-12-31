@@ -30,10 +30,7 @@ document.getElementById("doctorForm").addEventListener("submit", async (e) => {
     const specialization = document.getElementById("specialization").value;
     const issuingAuthority = document.getElementById("issuingAuthority").value;
     const licenseNumber = document.getElementById("licenseNumber").value;
-<<<<<<< HEAD
-=======
     const qualification = document.getElementById("qualification").value;
->>>>>>> 904657fd2d9e1e5a7261d22b39883a6bbc01738b
     const languages = Array.from(
       document.getElementById("languages").selectedOptions
     ).map((option) => option.value);
@@ -64,10 +61,7 @@ document.getElementById("doctorForm").addEventListener("submit", async (e) => {
       specialization,
       issuingAuthority,
       licenseNumber,
-<<<<<<< HEAD
-=======
       qualification,
->>>>>>> 904657fd2d9e1e5a7261d22b39883a6bbc01738b
       languages,
       clinicName,
       country,
